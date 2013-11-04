@@ -1,0 +1,74 @@
+/* portrait view */
+@media screen and (orientation:portrait) {
+	.ui-navbar li .ui-btn{
+		height:5em;
+		padding-top:2em;
+	}
+}
+/* landscape view */
+@media screen and (orientation:landscape) {
+	.ui-navbar li .ui-btn{
+		height:4em;
+	}
+}
+/**Icons**/
+.ui-icon-dimes-heart {
+	background:url("../images/heart.png") no-repeat scroll 0 0 transparent;
+	border-style: hidden;
+	-webkit-box-shadow: none;
+	-moz-border-radius: 0px;
+	-webkit-border-radius:0px;
+	border-radius:0px;
+	width: 26px;
+	height: 26px;
+}
+.ui-icon-dimes-podium {
+	background:url("../images/podium.png") no-repeat scroll 0 0 transparent;
+	border-style: hidden;
+	-webkit-box-shadow: none;
+	-moz-border-radius: 0px;
+	-webkit-border-radius:0px;
+	border-radius:0px;
+	width: 26px;
+	height: 26px;
+}
+.ui-icon-dimes-list {
+	background:url("../images/list.png") no-repeat scroll 0 0 transparent;
+	border-style: hidden;
+	-webkit-box-shadow: none;
+	-moz-border-radius: 0px;
+	-webkit-border-radius:0px;
+	border-radius:0px;
+	width: 26px;
+	height: 26px;
+}
+.ui-icon-dimes-fire {
+	background:url("../images/fire.png") no-repeat scroll 0 0 transparent;
+	border-style: hidden;
+	-webkit-box-shadow: none;
+	-moz-border-radius: 0px;
+	-webkit-border-radius:0px;
+	border-radius:0px;
+	width: 26px;
+	height: 26px;
+}
+.ui-icon-dimes-google_maps {
+	background:url("../images/google_maps.png") no-repeat scroll 0 0 transparent;
+	border-style: hidden;
+	-webkit-box-shadow: none;
+	-moz-border-radius: 0px;
+	-webkit-border-radius:0px;
+	border-radius:0px;
+	width: 26px;
+	height: 26px;
+}
+.ui-icon-dimes-star {
+	background:url("../images/star.png") no-repeat scroll 0 0 transparent;
+	border-style: hidden;
+	-webkit-box-shadow: none;
+	-moz-border-radius: 0px;
+	-webkit-border-radius:0px;
+	border-radius:0px;
+	width: 26px;
+	height: 26px;
+}

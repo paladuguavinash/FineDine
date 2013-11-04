@@ -1,121 +1,128 @@
+
+<%@ page contentType="text/html;charset=UTF-8" %>
+
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="main"/>
-		<title>Welcome to Grails</title>
-		<style type="text/css" media="screen">
-			#status {
-				background-color: #eee;
-				border: .2em solid #fff;
-				margin: 2em 2em 1em;
-				padding: 1em;
-				width: 12em;
-				float: left;
-				-moz-box-shadow: 0px 0px 1.25em #ccc;
-				-webkit-box-shadow: 0px 0px 1.25em #ccc;
-				box-shadow: 0px 0px 1.25em #ccc;
-				-moz-border-radius: 0.6em;
-				-webkit-border-radius: 0.6em;
-				border-radius: 0.6em;
-			}
+		<title>Dimes Server Reviews</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+		<script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
+		<script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
+		<script type="text/javascript" src="https://rawgithub.com/padolsey/prettyPrint.js/master/prettyprint.js"></script>
+		<g:javascript src="js.js" />
+		<link rel="text/css" href="${resource(dir:'css', file:'style.css')}">
 
-			.ie6 #status {
-				display: inline; /* float double margin fix http://www.positioniseverything.net/explorer/doubled-margin.html */
-			}
-
-			#status ul {
-				font-size: 0.9em;
-				list-style-type: none;
-				margin-bottom: 0.6em;
-				padding: 0;
-			}
-
-			#status li {
-				line-height: 1.3;
-			}
-
-			#status h1 {
-				text-transform: uppercase;
-				font-size: 1.1em;
-				margin: 0 0 0.3em;
-			}
-
-			#page-body {
-				margin: 2em 1em 1.25em 18em;
-			}
-
-			h2 {
-				margin-top: 1em;
-				margin-bottom: 0.3em;
-				font-size: 1em;
-			}
-
-			p {
-				line-height: 1.5;
-				margin: 0.25em 0;
-			}
-
-			#controller-list ul {
-				list-style-position: inside;
-			}
-
-			#controller-list li {
-				line-height: 1.3;
-				list-style-position: inside;
-				margin: 0.25em 0;
-			}
-
-			@media screen and (max-width: 480px) {
-				#status {
-					display: none;
-				}
-
-				#page-body {
-					margin: 0 1em 1em;
-				}
-
-				#page-body h1 {
-					margin-top: 0;
-				}
-			}
-		</style>
 	</head>
 	<body>
-		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div id="status" role="complementary">
-			<h1>Application Status</h1>
-			<ul>
-				<li>App version: <g:meta name="app.version"/></li>
-				<li>Grails version: <g:meta name="app.grails.version"/></li>
-				<li>Groovy version: ${GroovySystem.getVersion()}</li>
-				<li>JVM version: ${System.getProperty('java.version')}</li>
-				<li>Reloading active: ${grails.util.Environment.reloadingAgentEnabled}</li>
-				<li>Controllers: ${grailsApplication.controllerClasses.size()}</li>
-				<li>Domains: ${grailsApplication.domainClasses.size()}</li>
-				<li>Services: ${grailsApplication.serviceClasses.size()}</li>
-				<li>Tag Libraries: ${grailsApplication.tagLibClasses.size()}</li>
-			</ul>
-			<h1>Installed Plugins</h1>
-			<ul>
-				<g:each var="plugin" in="${applicationContext.getBean('pluginManager').allPlugins}">
-					<li>${plugin.name} - ${plugin.version}</li>
-				</g:each>
-			</ul>
+		<!-- Home Page-->
+		<div data-role="page" id="home" data-theme="c">
+			<div data-role="header" data-id="main" data-position="fixed" data-theme="c">
+				<h1>Dimes</h1>
+				<a href="#settings" data-role="button" data-icon="gear" data-transition="slide" class="ui-btn-right">Settings</a>
+			</div>
+			<div data-role="content" >
+				<label for="search-basic" class="ui-hidden-accessible">Search Input:</label>
+				<input type="search" name="search" id="search-basic" placeholder="Search">
+				<div data-role="navbar" >
+					<ul>
+						<li><a href="#near" data-icon="dimes-google_maps" data-transition="slide">Near Me</a></li>
+						<li><a href="#browse" data-icon="dimes-list" data-transition="slide">Browse</a></li>
+						<li><a href="#" data-icon="dimes-fire">Hot Spots</a></li>
+						<li><a href="#" data-icon="dimes-podium">Highest <br>Rated</a></li>
+						<li><a href="#" data-icon="dimes-heart">Spot of <br>the Week</a></li>
+						<li><a href="#" data-icon="dimes-star">Featured</a></li>
+					</ul>
+				</div>
+			</div>
+			<div data-id="main" data-role="footer" data-position="fixed" data-theme="c">
+				<h1>Advertisement</h1>
+			</div>
 		</div>
-		<div id="page-body" role="main">
-			<h1>Welcome to Grails</h1>
-			<p>Congratulations, you have successfully started your first Grails application! At the moment
-			   this is the default page, feel free to modify it to either redirect to a controller or display whatever
-			   content you may choose. Below is a list of controllers that are currently deployed in this application,
-			   click on each to execute its default action:</p>
 
-			<div id="controller-list" role="navigation">
-				<h2>Available Controllers:</h2>
-				<ul>
-					<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-						<li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
-					</g:each>
+		<!-- Settings Page-->
+		<div data-role="page" id="settings" data-theme="c" >
+			<div data-role="header" data-id="main" data-position="fixed" data-theme="c">
+				<a href="#home" data-role="button" data-icon="home" data-transition="slide" data-direction="reverse">Home</a>
+				<h1>Dimes</h1>
+			</div>
+			<div data-role="content">
+				<h2>Settings</h2>
+				<form method="post" action="">
+					<fieldset data-role="fieldcontain">
+						<label for="name">Name (optional)</label>
+						<input type="text" name="name" id="name">
+						<label for="name">Email Address (optional)</label>
+						<input type="text" name="email" id="email">
+					</fieldset>
+					<fieldset data-role="controlgroup" data-type="horizontal">
+						<legend>I want ratings for...</legend>
+						<label for="male">Male</label>
+						<input type="radio" name="gender" id="male" value="male">
+						<label for="female">Female</label>
+						<input type="radio" name="gender" id="female" value="female">
+						<label for="both">Both</label>
+						<input type="radio" name="gender" id="both" value="both">
+					</fieldset>
+					<input type="submit" value="Save Changes" data-inline="true" data-icon="check" style="margin: 0 auto;" onclick="alert('Changes saved.')">
+				</form>
+			</div>
+			<div data-id="main" data-role="footer" data-position="fixed" data-theme="c">
+				<h1>Advertisement</h1>
+			</div>
+		</div>
+
+		<!-- Near me page -->
+		<div data-role="page" id="near" data-theme="c">
+			<div data-role="header" data-id="main" data-position="fixed" data-theme="c">
+				<a href="#home" data-role="button" data-icon="home" data-transition="slide" data-direction="reverse">Home</a>
+				<h1>Dimes</h1>
+				<a href="#settings" data-role="button" data-icon="gear" data-transition="slide">Settings</a>
+			</div>
+			<div data-role="content" id="near-results">
+				<h2>Spots near me</h2>
+				<!-- Near Output data from yelp -->
+			</div>
+			<div data-id="main" data-role="footer" data-position="fixed" data-theme="c">
+				<h1>Advertisement</h1>
+			</div>
+		</div>
+
+
+		<!-- Browse page -->
+		<div data-role="page" id="browse" data-theme="c">
+			<div data-role="header" data-id="main" data-position="fixed" data-theme="c">
+				<a href="#home" data-role="button" data-icon="home" data-transition="slide" data-direction="reverse">Home</a>
+				<h1>Dimes</h1>
+				<a href="#settings" data-role="button" data-icon="gear" data-transition="slide">Settings</a>
+			</div>
+			<div data-role="content" data-theme="c">
+				<ul data-role="listview" data-filter="true"
+					data-filter-placeholder="Search for Spots"
+					data-autodividers="true">
+					<li>
+						<a href="${resource(file:'example')}" data-transition="slide">
+							<h2>CHOP Chinook</h2>
+							<p>Rating</p>
+						</a>
+					</li>
+					<li><a href="#">Earls Calgary 16th Avenue</a></li>
+					<li><a href="#">Earls Calgary Dalhousie</a></li>
+					<li><a href="#">JOEY Barlow</a></li>
+					<li><a href="#">JOEY Barlow</a></li>
+					<li><a href="#">JOEY Barlow</a></li>
+					<li><a href="#">JOEY Chinook</a></li>
+					<li><a href="#">JOEY Crowfoot</a></li>
+					<li><a href="#">JOEY Eau Claire</a></li>
+					<li><a href="#">MacDonald's</a></li>
+					<li><a href="#">Tony Roma's</a></li>
 				</ul>
+			</div>
+			<div data-id="main" data-role="footer" data-position="fixed" data-theme="c">
+				<h1>Advertisement</h1>
 			</div>
 		</div>
 	</body>
