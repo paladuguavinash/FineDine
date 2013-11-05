@@ -1,6 +1,9 @@
 package dimesapp
 
 import org.springframework.dao.DataIntegrityViolationException
+import yelp.Yelp
+import grails.converters.JSON
+
 
 class User_CommentsController {
 
@@ -99,4 +102,30 @@ class User_CommentsController {
             redirect(action: "show", id: id)
         }
     }
-}
+        def search(){
+            
+        //println params
+//         def term=param.list("term")
+//         def limit=param.list("limit")
+//         def latitude=param.list("latitude")
+//         def lpongitude=param.list("longitude")
+            Yelp yelp = new Yelp('xwR1uqIewMijt9_2CjTr1A','lz-aMfK3QZKtR46t8_pPvMXhTh0','CW24XsRzJ-K-AwFtN-8Co1xw7gUfkJL9','eA6oE9USDqzTuUur9BuBK_Wdmmc')
+            def response=yelp.search('yelp','3', 37.788022, -122.399797)
+            render response 
+           // [data:response]
+            
+           // JASON.use(yelp)
+           
+        } 
+     def searchBar(){
+         
+      //   def term=param.list("term")
+//         def sort=param.list("sort")
+//         def latitude=param.list("latitude")
+//         def lpongitude=param.list("longitude")
+        Yelp yelp = new Yelp('xwR1uqIewMijt9_2CjTr1A','lz-aMfK3QZKtR46t8_pPvMXhTh0','CW24XsRzJ-K-AwFtN-8Co1xw7gUfkJL9', 'eA6oE9USDqzTuUur9BuBK_Wdmmc');
+        def response=yelp.searchBar('yelp',0, 37.788022, -122.399797)
+            render response
+            //[find:response]
+            }
+  }

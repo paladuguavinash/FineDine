@@ -67,6 +67,18 @@ public class Yelp {
     Response response = request.send();
     return response.getBody();
   }
+   
+    public String searchBar(String term,Number sort,double latitude, double longitude) {
+    OAuthRequest request = new OAuthRequest(Verb.GET, "http://api.yelp.com/v2/search");
+    request.addQuerystringParameter("term", term);
+    request.addQuerystringParameter("sort",sort.toString());
+    request.addQuerystringParameter("ll", latitude + "," + longitude);
+    this.service.signRequest(this.accessToken, request);
+    Response response = request.send();
+    return response.getBody();
+  }
+    
+   
 
   // CLI
 //  public static void main(String[] args) {
