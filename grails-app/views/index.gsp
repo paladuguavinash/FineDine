@@ -14,19 +14,30 @@
 		<script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
 		<script type="text/javascript" src="https://rawgithub.com/padolsey/prettyPrint.js/master/prettyprint.js"></script>
 		<g:javascript src="js.js" />
-		<link rel="text/css" href="${resource(dir:'css', file:'style.css')}">
+		<link rel="stylesheet" href="${resource(dir:'css', file:'style.css')}">
+
+
 
 	</head>
 	<body>
 		<!-- Home Page-->
 		<div data-role="page" id="home" data-theme="c">
+		    <div data-role="panel" id="searchPanel" data-theme="a">
+			<!--Search Panel-->
+			<g:form controller="user_comments" action="search" data-display="overlay" data-position="left">
+			    <label for="search-terms" class="ui-hidden-accessible">Terms:</label>
+			    <input type="search" name="terms" id="search-terms" placeholder="Search">
+			    <label for="search-location" class="ui-hidden-accessible">Location:</label>
+			    <input type="search" name="location" id="search-location" placeholder="Search">
+			</g:form>
+		    </div>
 			<div data-role="header" data-id="main" data-position="fixed" data-theme="c">
 				<h1>Dimes</h1>
 				<a href="#settings" data-role="button" data-icon="gear" data-transition="slide" class="ui-btn-right">Settings</a>
 			</div>
 			<div data-role="content" >
-				<label for="search-basic" class="ui-hidden-accessible">Search Input:</label>
-				<input type="search" name="search" id="search-basic" placeholder="Search">
+				    <label for="search-basic" class="ui-hidden-accessible">Search Input:</label>
+				    <input type="search" name="search" id="search-basic" placeholder="Search">
 				<div data-role="navbar" >
 					<ul>
 						<li><a href="#near" data-icon="dimes-google_maps" data-transition="slide">Near Me</a></li>
@@ -100,6 +111,7 @@
 				<a href="#settings" data-role="button" data-icon="gear" data-transition="slide">Settings</a>
 			</div>
 			<div data-role="content" data-theme="c">
+
 				<ul data-role="listview" data-filter="true"
 					data-filter-placeholder="Search for Spots"
 					data-autodividers="true">
@@ -120,10 +132,18 @@
 					<li><a href="#">MacDonald's</a></li>
 					<li><a href="#">Tony Roma's</a></li>
 				</ul>
+
 			</div>
 			<div data-id="main" data-role="footer" data-position="fixed" data-theme="c">
 				<h1>Advertisement</h1>
 			</div>
 		</div>
+		<script>
+		    $(document).ready(function() {
+			$("#search-basic").on("click", function() {
+			    $( "#searchPanel" ).panel( "open");
+			});
+		    });
+		</script>
 	</body>
 </html>

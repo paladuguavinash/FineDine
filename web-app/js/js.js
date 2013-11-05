@@ -24,9 +24,9 @@ function success(position) {
     var latLng = latitude + "," + longitude;
 
     //yelp search terms
-    var terms = 'food';
-
-    //var near = 'Calgary';
+    var terms = 'clothes';
+    //yelp search location
+    var near = 'Calgary';
     //console.log(latLng);
     //Test: 51.13281770591543,-114.12918967723309
 
@@ -38,7 +38,7 @@ function success(position) {
     parameters = [];
     parameters.push(['term', terms]);
     //ll = latitude and longitude, change to location, near for places located in var near
-    parameters.push(['ll', latLng]);
+    parameters.push(['location', near]);
     parameters.push(['callback', 'cb']);
     parameters.push(['oauth_consumer_key', auth.consumerKey]);
     parameters.push(['oauth_consumer_secret', auth.consumerSecret]);
