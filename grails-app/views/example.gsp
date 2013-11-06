@@ -20,13 +20,13 @@
 		<script type="text/javascript" src="https://rawgithub.com/padolsey/prettyPrint.js/master/prettyprint.js"></script>
 
 		<g:javascript src="js.js" />
-		<link rel="text/css" href="${resource(dir:'css', file:'style.css')}">
+		<link rel="stylesheet" href="${resource(dir:'css', file:'style.css')}">
 	</head>
 	<body>
 		<!-- Example restaurant page -->
-		<div data-role="page" id="browse" data-theme="c">
+		<div data-role="page" id="example" data-theme="c">
 			<div data-role="header" data-id="main" data-position="fixed" data-theme="c">
-				<a href="#home" data-role="button" data-icon="home" data-transition="slide" data-direction="reverse">Home</a>
+				<a href="/DimesApp/" data-role="button" data-icon="home" data-transition="slide" data-direction="reverse">Home</a>
 				<h1>Dimes</h1>
 				<a href="#settings" data-role="button" data-icon="gear" data-transition="slide">Settings</a>
 			</div>
@@ -41,8 +41,8 @@
 				<p>Hours</p>
 				<hr>
 				<div data-role="controlgroup"  data-type="horizontal" style="margin: 0 auto !important;">
-					<a href="#" data-role="button">Add review</a>
-					<a href="#" data-role="button">Favorite</a>
+					<a href="${resource(controller:'user_Comments', file:'create')}" data-role="button" data-icon="plus">Add review</a>
+					<a href="#" data-role="button" data-icon="star">Favorite</a>
 				</div>
 				<br>
 				<ul data-role="listview">
@@ -57,6 +57,22 @@
 				<p>Posted by Anonymous - [Date]</p>
 				[Rating]
 				<p>[Gender Icon] This waitress is smokin' hot! Half-Asians are the best after all.</p>
+
+			</div>
+			<div data-id="main" data-role="footer" data-position="fixed" data-theme="c">
+				<h1>Advertisement</h1>
+			</div>
+		</div>
+		<!-- Add review -->
+		<div data-role="page" id="addReview" data-theme="c">
+			<div data-role="header" data-id="main" data-position="fixed" data-theme="c">
+				<a href="/DimesApp/" data-role="button" data-icon="home" data-transition="slide" data-direction="reverse">Home</a>
+				<h1>Dimes</h1>
+				<a href="#settings" data-role="button" data-icon="gear" data-transition="slide">Settings</a>
+			</div>
+			<div data-role="content">
+				<h2>Add review</h2>
+
 
 			</div>
 			<div data-id="main" data-role="footer" data-position="fixed" data-theme="c">

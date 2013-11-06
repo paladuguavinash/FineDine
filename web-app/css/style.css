@@ -1,3 +1,11 @@
+/*********************************************************
+JQUERY DEFAULT CSS OVERRIDES
+**********************************************************/
+.ui-panel {
+    width: 100% !important;
+
+}
+
 /* portrait view */
 @media screen and (orientation:portrait) {
 	.ui-navbar li .ui-btn{
