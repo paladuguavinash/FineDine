@@ -1,19 +1,18 @@
 package dimesapp
 
 
-class User_Comments {
-    
-    String restaurantId
+class UserComments {
+   
     String gender
     String serverName
     String comments
-    Integer ratings
+    Integer userRatings
     Date date
     
-   static belongsTo=[user:User]
+   static belongsTo=[user:User,restaurant:Restaurant]
 
    static constraints = {
-		restaurantId nullable: false, maxSize: 65
+       
                 serverName nullable: true, maxSize:30
                 gender inList:["Male","Female"]
               	comments nullable:true,maxsize:900

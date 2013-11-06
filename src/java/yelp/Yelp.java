@@ -77,7 +77,31 @@ public class Yelp {
     Response response = request.send();
     return response.getBody();
   }
-    
+    public String place(String term,String location,String limit) {
+    OAuthRequest request = new OAuthRequest(Verb.GET, "http://api.yelp.com/v2/search");
+    request.addQuerystringParameter("term", term);
+    request.addQuerystringParameter("location",location);
+    request.addQuerystringParameter("limit",limit);
+    this.service.signRequest(this.accessToken, request);
+    Response response = request.send();
+    return response.getBody();
+  }
+     public String place(String location,String limit) {
+    OAuthRequest request = new OAuthRequest(Verb.GET, "http://api.yelp.com/v2/search");
+    request.addQuerystringParameter("location",location);
+    request.addQuerystringParameter("limit",limit);
+    this.service.signRequest(this.accessToken, request);
+    Response response = request.send();
+    return response.getBody();
+  }
+     public String findTerm(String term,String limit) {
+    OAuthRequest request = new OAuthRequest(Verb.GET, "http://api.yelp.com/v2/search");
+    request.addQuerystringParameter("term",term);
+    request.addQuerystringParameter("limit",limit);
+    this.service.signRequest(this.accessToken, request);
+    Response response = request.send();
+    return response.getBody();
+  }
    
 
   // CLI
