@@ -23,12 +23,20 @@
 			<div data-role="panel" id="searchPanel" data-theme="c" data-display="overlay" data-position="left">
 			    <!--Search Panel-->
 				<h2>Search</h2>
-				<g:form controller="userComments" action="findTerm" >
+				<g:form controller="userComments" action="findTerm" name="userResponse" >
 					<label for="search-terms">Terms:</label>
 					<input type="search" name="term" id="search-terms" placeholder="Examples: Earls, JOEY, CHOP">
 					<label for="search-location">Near:</label>
 					<input type="search" name="location" id="search-location" placeholder="Example: Calgary">
-					<g:submitButton name="submit" value="Search" />
+					<g:submitButton name="submit" value="search"
+						onclick="if(this.parentNode.parentNode.checkValidity()) {
+						${remoteFunction(controller:'userComments',
+						action: 'findTerm',
+						params:'\'location=\' + $(\'#search-location\').val()'+'\'term=\' + $(\'#search-terms\').val()',
+						onSuccess: '$("#response")',
+						onFailure: 'alert("Please verify the location")')}
+						return false;
+						};"/>
 				</g:form>
 			</div><!--/panel-->
 		    <!-- Settings Panel-->
@@ -127,9 +135,9 @@
 		</div>
 		<script>
 			$(document).ready(function() {
-				$("#search-basic").on("click", function() {
-					$( "#searchPanel" ).panel( "open");
-				});
+			$("#search-basic").on("click", function() {
+			$( "#searchPanel" ).panel( "open");
+			});
 			});
 		</script>
 	</body>
