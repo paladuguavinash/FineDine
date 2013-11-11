@@ -131,8 +131,8 @@ class UserCommentsController {
             }
 
 	def findTerm(){
-		print '*******************************************'
-		println params
+//		print '*******************************************'
+//		println params
 		def response
 		// def term=params.list('term')
 		// print term
@@ -140,42 +140,60 @@ class UserCommentsController {
 		// print location
 		Yelp yelp=new Yelp('xwR1uqIewMijt9_2CjTr1A','lz-aMfK3QZKtR46t8_pPvMXhTh0','CW24XsRzJ-K-AwFtN-8Co1xw7gUfkJL9', 'eA6oE9USDqzTuUur9BuBK_Wdmmc')
 		if(params.term && params.location)
-		response=yelp.place(params.term,params.location,'3')
+		response=yelp.place(params.term,params.location,'2')
 		if(params.term && !params.location)
-		response=yelp.place(params.term,'3')
+		response=yelp.place(params.term,'2')
 		if(!params.term && params.location)
-		response=yelp.place(params.location,'3')
+		response=yelp.place(params.location,'2')
 
 		response=JSON.parse(response)
-		print response
-		print response
-
-		print '****************address**********************************'
-
-		print response.businesses.location.display_address
-
-		print '****************id**********************************'
-		print response.businesses.id
-
-
-		print '****************rating**********************************'
-		print response.businesses.rating_img_url_large
-		// print '********************************** the adder
-		// return response
-		print response.businesses.categories
-		print response.businesses.rating
-		render(view: "index",model:[address:response.businesses.location.display_address,id:response.businesses.id,ratingImage:response.businesses.rating_img_url_large,count:response.businesses.review_count,categories:response.businesses.categories,rating:response.businesses.rating])
-
+                print response
+                print "*********************************************************************"
+                 response= response.businesses
+                 def result=[]
+                 response.each{obj->
+                     def temp=[:]
+                     result.add([rating:obj.rating,id:obj.id,name:obj.name,address:obj.location.display_address,categories:obj.categories])
+                     
+                     
+                     ////                     def temp=[]
+//                     temp.add(obj.rating)
+//                     temp.add(obj.id)
+//                     temp.add(obj.name)
+//                     temp.add(obj.categories[0][0])
+//                     temp.add(obj.location.display_address[0])
+                    // print temp
+                    // result.add(temp)
+                     
+                     
+                 }
+                 print "check the resposne ****************"
+                 println result
+//		print response.toString()
+//                print response.rating
+//                print response.name
+//                print response.location.display_address
+//                print response.id
+//                print response.categories
+            
+               // def result=[]
+		//render(view: "index",model:[address:response.businesses.location.display_address,id:response.businesses.id,ratingImage:response.businesses.rating_img_url_large,count:response.businesses.review_count,categories:response.businesses.categories,rating:response.businesses.rating])
+                render(view: "/secondPage.gsp",model:[result:result])
+                //return [result:result]
 	}
-}
 
-//    def  location(){
-//         Yelp yelp=new Yelp('xwR1uqIewMijt9_2CjTr1A','lz-aMfK3QZKtR46t8_pPvMXhTh0','CW24XsRzJ-K-AwFtN-8Co1xw7gUfkJL9', 'eA6oE9USDqzTuUur9BuBK_Wdmmc')
-//          def response=yelp.place('calgary','3')
-//          response=JSON.parse(response)
-//          render response
-//
-//    }
+
+    def  location(){
+         Yelp yelp=new Yelp('xwR1uqIewMijt9_2CjTr1A','lz-aMfK3QZKtR46t8_pPvMXhTh0','CW24XsRzJ-K-AwFtN-8Co1xw7gUfkJL9', 'eA6oE9USDqzTuUur9BuBK_Wdmmc')
+          def response=yelp.location('calgary')
+          response=JSON.parse(response)
+          //print response.location.city
+           print response.businesses.location.city
+           print response.businesses.location.state_code
+          render response
+
+    }
+}
 //    def term(){
 //        Yelp yelp=new Yelp('xwR1uqIewMijt9_2CjTr1A','lz-aMfK3QZKtR46t8_pPvMXhTh0','CW24XsRzJ-K-AwFtN-8Co1xw7gUfkJL9', 'eA6oE9USDqzTuUur9BuBK_Wdmmc')
 //          def response=yelp.place('yelp','3')
