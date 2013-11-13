@@ -17,7 +17,7 @@
             <g:each var="res" in="${result}">
                 
                 ${res.rating}
-                 ${res.id}
+                ${res.id}
                 ${res.name}
                 ${res.categories}
                 ${res.address}
