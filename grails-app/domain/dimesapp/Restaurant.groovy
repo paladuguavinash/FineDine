@@ -5,7 +5,7 @@ class Restaurant {
     String restaurantId
     String name
     String address
-    Integer rating
+    double dimesRating
 
     static hasMany=[comments:UserComments]
     
@@ -14,7 +14,7 @@ class Restaurant {
         restaurantId nullable:false,blank:false
         name nullable:false,blank:false
         address nullable:false,blank:false
-        rating  nullable:false,blank:false
+        dimesRating  nullable:false,blank:false
         
         
     }

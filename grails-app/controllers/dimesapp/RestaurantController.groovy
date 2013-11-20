@@ -1,6 +1,10 @@
 package dimesapp
 
+
 import org.springframework.dao.DataIntegrityViolationException
+import grails.plugins.springsecurity.Secured
+
+@Secured(['IS_AUTHENTICATED_FULLY'])
 
 class RestaurantController {
 

@@ -104,3 +104,7 @@ grails.plugins.springsecurity.authority.className = 'DimesApp.Role'
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'dimesapp.User'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'dimesapp.UserRole'
 grails.plugins.springsecurity.authority.className = 'dimesapp.Role'
+
+//rateable plugin
+
+//grails.rateable.rater.evaluator = { session.user }

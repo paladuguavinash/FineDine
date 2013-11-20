@@ -104,17 +104,29 @@ public class Yelp {
         return response.getBody();
     }
 
-  // CLI
-//  public static void main(String[] args) {
-//    // Update tokens here from Yelp developers site, Manage API access.
-//    String consumerKey = "";
-//    String consumerSecret = "";
-//    String token = "";
-//    String tokenSecret = "";
-//
-//    Yelp yelp = new Yelp(consumerKey, consumerSecret, token, tokenSecret);
-//    String response = yelp.search("burritos", 30.361471, -87.164326);
-//
-//    System.out.println(response);
-//  }
+    public String tempId(String id) {
+        OAuthRequest request = new OAuthRequest(Verb.GET, "http://api.yelp.com/v2/search");
+        request.addQuerystringParameter("id", id.toString());
+        this.service.signRequest(this.accessToken, request);
+        Response response = request.send();
+        return response.getBody();
+    }
+
+    public String loc(String id) {
+        OAuthRequest request = new OAuthRequest(Verb.GET, "http://api.yelp.com/v2/business/" + id);
+        request.addQuerystringParameter("id", id);
+        this.service.signRequest(this.accessToken, request);
+        Response response = request.send();
+        return response.getBody();
+    }
+
+    public String near(double latitude, double longitude, String distance, String id) {
+        OAuthRequest request = new OAuthRequest(Verb.GET, "http://api.yelp.com/v2/business/");
+        request.addQuerystringParameter("ll", latitude + "," + longitude);
+        request.addQuerystringParameter("id", id);
+        request.addQuerystringParameter("distance", distance);
+        this.service.signRequest(this.accessToken, request);
+        Response response = request.send();
+        return response.getBody();
+    }
 }

@@ -3,11 +3,15 @@ package dimesapp
 import org.springframework.dao.DataIntegrityViolationException
 import yelp.Yelp
 import grails.converters.JSON
-
+import dimesapp.Restaurant
 import org.springframework.dao.DataIntegrityViolationException
+import grails.plugins.springsecurity.Secured
+
+
 
 class UserCommentsController {
 
+    def springSecurityService
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -67,7 +71,7 @@ class UserCommentsController {
         if (version != null) {
             if (userCommentsInstance.version > version) {
                 userCommentsInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'userComments.label', default: 'UserComments')] as Object[],
+                    [message(code: 'userComments.label', default: 'UserComments')] as Object[],
                           "Another user has updated this UserComments while you were editing")
                 render(view: "edit", model: [userCommentsInstance: userCommentsInstance])
                 return
@@ -103,113 +107,116 @@ class UserCommentsController {
             redirect(action: "show", id: id)
         }
     }
-     def search(){
+    def search(){
 
-        //println params
-//         def term=param.list("term")
-//         def limit=param.list("limit")
-//         def latitude=param.list("latitude")
-//         def longitude=param.list("longitude")
-            Yelp yelp = new Yelp('xwR1uqIewMijt9_2CjTr1A','lz-aMfK3QZKtR46t8_pPvMXhTh0','CW24XsRzJ-K-AwFtN-8Co1xw7gUfkJL9','eA6oE9USDqzTuUur9BuBK_Wdmmc')
-            def response=yelp.search('yelp','3', 37.788022, -122.399797)
-                render response
-           // [data:response]
+        Yelp yelp = new Yelp('xwR1uqIewMijt9_2CjTr1A','lz-aMfK3QZKtR46t8_pPvMXhTh0','CW24XsRzJ-K-AwFtN-8Co1xw7gUfkJL9','eA6oE9USDqzTuUur9BuBK_Wdmmc')
+        def response=yelp.search('yelp','3', 37.788022, -122.399797)
+        render response
+         
+    }
+    def searchBar(){
 
-           // JASON.use(yelp)
-
-        }
-     def searchBar(){
-
-      //   def term=param.list("term")
-//         def sort=param.list("sort")
-//         def latitude=param.list("latitude")
-//         def lpongitude=param.list("longitude")
         Yelp yelp = new Yelp('xwR1uqIewMijt9_2CjTr1A','lz-aMfK3QZKtR46t8_pPvMXhTh0','CW24XsRzJ-K-AwFtN-8Co1xw7gUfkJL9', 'eA6oE9USDqzTuUur9BuBK_Wdmmc')
         def response=yelp.searchBar('yelp',0, 37.788022, -122.399797)
-            render response
-            //[find:response]
-            }
+        render response        
+    }
+    def findTerm(){
 
-	def findTerm(){
-//		print '*******************************************'
-//		println params
-		def response
-		// def term=params.list('term')
-		// print term
-		// def location=params.list('location')
-		// print location
-		Yelp yelp=new Yelp('xwR1uqIewMijt9_2CjTr1A','lz-aMfK3QZKtR46t8_pPvMXhTh0','CW24XsRzJ-K-AwFtN-8Co1xw7gUfkJL9', 'eA6oE9USDqzTuUur9BuBK_Wdmmc')
-		if(params.term && params.location)
-		response=yelp.place(params.term,params.location,'2')
-		if(params.term && !params.location)
-		response=yelp.place(params.term,'2')
-		if(!params.term && params.location)
-		response=yelp.place(params.location,'2')
-
-		response=JSON.parse(response)
-                print response
-                print "*********************************************************************"
-                 response= response.businesses
-                 def result=[]
-                 response.each{obj->
-                     def temp=[:]
-                     result.add([rating:obj.rating,id:obj.id,name:obj.name,address:obj.location.display_address,categories:obj.categories])
-                     
-                     
-                     ////                     def temp=[]
-//                     temp.add(obj.rating)
-//                     temp.add(obj.id)
-//                     temp.add(obj.name)
-//                     temp.add(obj.categories[0][0])
-//                     temp.add(obj.location.display_address[0])
-                    // print temp
-                    // result.add(temp)
-                     
-                     
-                 }
-                 print "check the resposne ****************"
-                 println result
-//		print response.toString()
-//                print response.rating
-//                print response.name
-//                print response.location.display_address
-//                print response.id
-//                print response.categories
+        def response
             
-               // def result=[]
-		//render(view: "index",model:[address:response.businesses.location.display_address,id:response.businesses.id,ratingImage:response.businesses.rating_img_url_large,count:response.businesses.review_count,categories:response.businesses.categories,rating:response.businesses.rating])
-                render(view: "/secondPage.gsp",model:[result:result])
-                //return [result:result]
-	}
+        Yelp yelp=new Yelp('xwR1uqIewMijt9_2CjTr1A','lz-aMfK3QZKtR46t8_pPvMXhTh0','CW24XsRzJ-K-AwFtN-8Co1xw7gUfkJL9', 'eA6oE9USDqzTuUur9BuBK_Wdmmc')
+        if(params.term && params.location)
+        response=yelp.place(params.term,params.location,'20')
+        if(params.term && !params.location)
+        response=yelp.place(params.term,'20')
+        if(!params.term && params.location)
+        response=yelp.place(params.location,'20')
 
+        response=JSON.parse(response)
+        //print response.toString()
+        response= response.businesses
+        //print "@@@@@@@@@@@@@@@@@@@@@@@@@@" +response
+        def result=[]
+        response.each{obj->
+               
+            result.add([rating:obj.rating,id:obj.id,name:obj.name,address:obj.location.display_address,categories:obj.categories])
+    
+        }
+  
+        render(view: "/secondPage.gsp",model:[result:result])
+                
+    }
 
     def  location(){
-         Yelp yelp=new Yelp('xwR1uqIewMijt9_2CjTr1A','lz-aMfK3QZKtR46t8_pPvMXhTh0','CW24XsRzJ-K-AwFtN-8Co1xw7gUfkJL9', 'eA6oE9USDqzTuUur9BuBK_Wdmmc')
-          def response=yelp.location('calgary')
-          response=JSON.parse(response)
-          //print response.location.city
-           print response.businesses.location.city
-           print response.businesses.location.state_code
-          render response
+        Yelp yelp=new Yelp('xwR1uqIewMijt9_2CjTr1A','lz-aMfK3QZKtR46t8_pPvMXhTh0','CW24XsRzJ-K-AwFtN-8Co1xw7gUfkJL9', 'eA6oE9USDqzTuUur9BuBK_Wdmmc')
+        def response=yelp.location('calgary')
+        response=JSON.parse(response)
+        render response
+    }
 
+    def restaurant(){
+        Yelp yelp=new Yelp('xwR1uqIewMijt9_2CjTr1A','lz-aMfK3QZKtR46t8_pPvMXhTh0','CW24XsRzJ-K-AwFtN-8Co1xw7gUfkJL9', 'eA6oE9USDqzTuUur9BuBK_Wdmmc')
+        def response=yelp.loc(params.id)
+            
+        response=JSON.parse(response.toString())
+        //print response
+        def result=[]
+        def restaurant=Restaurant.findByRestaurantId(params.id)
+        if(!restaurant){
+            restaurant=new Restaurant()
+            restaurant.restaurantId=params.id
+            restaurant.address=response.location.display_address
+            restaurant.name=response.name
+            
+            restaurant.save(flush:true)
+            print restaurant.errors
+        }
+               
+            
+        result.add([id:params.Id,address:response.location.display_address,categories:response.categories,rating:response.rating,totalReviews:response.review_count,ratingImage:response.rating_img_url, snippet_text:response.snippet_text,phone:response.phone,Image:response.image_url,name:response.name])
+        render(view: "/thirdPage.gsp",model:[result:result,resId:params.id])
+        //  return [result:result]
+    }
+    def nearMe(){
+        Yelp yelp=new Yelp('xwR1uqIewMijt9_2CjTr1A','lz-aMfK3QZKtR46t8_pPvMXhTh0','CW24XsRzJ-K-AwFtN-8Co1xw7gUfkJL9', 'eA6oE9USDqzTuUur9BuBK_Wdmmc')
+        def response=yelp.near("ll",",","distance","id")
+        response=JSON.parse(response)
+        return response
+           
+    }
+    def rating(int count){
+            
+            
+    }
+    def reviews(String comment){
+            
+            
+    }
+    def reviewCount(int totReview){
+            
+    }
+    def addReviews(){
+            
+        [restaurantId:params.id,userComments:new UserComments()]
+            
+            
+    }
+    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+    def submit(){
+        print "*******************************"+ params
+        UserComments userComments=new UserComments()
+        userComments.restaurant=Restaurant.findByRestaurantId(params.restaurantId)
+        userComments.comments=params.comments
+        userComments.userRatings=params.ratings
+        userComments.user=springSecurityService.getCurrentUser()
+        userComments.gender=params.gender
+        userComments.date=new Date()
+        userComments.save(flush:true)
+        print userComments.restaurant
+        println "error"+userComments.errors
+       // def response=userComments.save()
+        
+        render(view: "/fourthPage.gsp",model:[comments:params.comments,ratings:params.ratings,name:params.restaurantName,gender:params.gender])
     }
 }
-//    def term(){
-//        Yelp yelp=new Yelp('xwR1uqIewMijt9_2CjTr1A','lz-aMfK3QZKtR46t8_pPvMXhTh0','CW24XsRzJ-K-AwFtN-8Co1xw7gUfkJL9', 'eA6oE9USDqzTuUur9BuBK_Wdmmc')
-//          def response=yelp.place('yelp','3')
-//          response=JSON.parse(response)
-//          render response
-//
-//    }
-//    def response(){
-//
-//         // def term=param.list('find')
-//          //def location=param.list('location')
-//         if(param.term && param.location){
-//             redirect(action:"findTerm")
-//         }else if(param.term && !param.location){
-//             redirect(action:"term")
-//          }else{
-//            redirect(action:"location")
-//       }
-   //render(view: "simpleSearchResults", model: [individuals: inds,groups: grps,firms: frms])
+
