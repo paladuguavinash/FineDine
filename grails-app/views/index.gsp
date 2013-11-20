@@ -20,13 +20,7 @@
 
 	</head>
 	<body>
-            <div>
-                <sec:LoggedOut>
-                <g:link controller='login' action='auth'>Login</g:link>
-                    </sec:ifNotLoggedIn>
-
-                <sec:ifLoggedIn><g:submitButton name="submit" value="submit"
-		<!-- Home Page-->
+           
 		<div data-role="page" id="home" data-theme="a">
 			<div data-role="panel" id="searchPanel" data-theme="a" data-display="overlay" data-position="left" >
 				<!--Search Panel-->
