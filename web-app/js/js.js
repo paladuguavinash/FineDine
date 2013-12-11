@@ -14,15 +14,15 @@ var Geo = {};
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(success, error);
 }
-
+var latLng;
 //If we are able to get the latitude and the longitude from the browser/device;
 function success(position) {
     Geo.lat = position.coords.latitude;
     Geo.lng = position.coords.longitude;
     var latitude = Geo.lat.toString();
     var longitude = Geo.lng.toString();
-    var latLng = latitude + "," + longitude;
-
+    latLng = latitude + "," + longitude;
+    alert(latLng);
     //yelp search terms
     var terms = 'clothes';
     //yelp search location
@@ -65,9 +65,10 @@ function success(position) {
 	'dataType': 'jsonp',
 	'jsonpCallback': 'cb',
 	'success': function(data, textStats, XMLHttpRequest) {
-	    //console.log(data);
-	    var output = prettyPrint(data);
-	    $("#near-results").append(output);
+	    console.log(data);
+	    
+            //var output = prettyPrint(data);
+	    $("#near-results").append(data);
 	}
     });
 }

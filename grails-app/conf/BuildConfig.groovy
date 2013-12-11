@@ -4,7 +4,7 @@ grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
-grails.server.port.http = 8096
+grails.server.port.http = 8095
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
 // uncomment (and adjust settings) to fork the JVM to isolate classpaths
@@ -51,7 +51,7 @@ grails.project.dependency.resolution = {
         runtime ":resources:1.1.6"
         
         compile ":spring-security-core:1.2.7.3"
-        compile ":rateable:0.7.1"
+       // compile ":rateable:0.7.1"
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0"
         //runtime ":cached-resources:1.0"

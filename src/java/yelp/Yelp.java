@@ -120,11 +120,11 @@ public class Yelp {
         return response.getBody();
     }
 
-    public String near(double latitude, double longitude, String distance, String id) {
-        OAuthRequest request = new OAuthRequest(Verb.GET, "http://api.yelp.com/v2/business/");
+    public String near(double latitude, double longitude) {
+        OAuthRequest request = new OAuthRequest(Verb.GET, "http://api.yelp.com/v2/search");
         request.addQuerystringParameter("ll", latitude + "," + longitude);
-        request.addQuerystringParameter("id", id);
-        request.addQuerystringParameter("distance", distance);
+        //request.addQuerystringParameter("distance", distance);
+        //request.addQuerystringParameter("limit", limit);
         this.service.signRequest(this.accessToken, request);
         Response response = request.send();
         return response.getBody();

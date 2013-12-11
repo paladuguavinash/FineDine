@@ -30,7 +30,7 @@
 					
 						<g:sortableColumn property="address" title="${message(code: 'restaurant.address.label', default: 'Address')}" />
 					
-						<g:sortableColumn property="rating" title="${message(code: 'restaurant.rating.label', default: 'Rating')}" />
+						
 					
 					</tr>
 				</thead>
@@ -44,7 +44,7 @@
 					
 						<td>${fieldValue(bean: restaurantInstance, field: "address")}</td>
 					
-						<td>${fieldValue(bean: restaurantInstance, field: "rating")}</td>
+						
 					
 					</tr>
 				</g:each>

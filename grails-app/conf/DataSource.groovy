@@ -73,6 +73,8 @@ development {
 dataSource {
 dbCreate = "update" // one of 'create', 'create-drop','update'
 url = "jdbc:mysql://localhost:3306/dimesapp"
+ //url =  "jdbc:mysql://dimes.jonleung.net:8080/dimes_main"
+
 }
 }
 test {

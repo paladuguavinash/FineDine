@@ -6,6 +6,8 @@ class User {
 
 	String username
 	String password
+        String fname
+        String lname
        // String email
         //String gender
 	boolean enabled
@@ -16,6 +18,8 @@ class User {
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
+                fname blank:false, unique:false
+                lname blank:false,unique:false
                // email blank:false,unique:true
                // gender inList:["Male","FEMALE","BOTH"]
 	}       

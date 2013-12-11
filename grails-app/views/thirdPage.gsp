@@ -1,9 +1,3 @@
-<!--
-  To change this license header, choose License Headers in Project Properties.
-  To change this template file, choose Tools | Templates
-  and open the template in the editor.
--->
-
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <html>
@@ -15,18 +9,33 @@
         <g:link controller="userComments" action="addReviews" params="[id:resId]">Add Review</g:link>
         <g:each var="res" in="${result}">
         <li> 
-           Name: <p>${res. name}</p></br>
-           Address:<p>${res.address}</p></br>
-           Categories:<p>${res.categories}</p></br>
-            Yelp's Rating:<p>${res.rating}</p></br>
-            User's Review<p>${res.totalReviews}</p></br>
-           Comments:<p>${res. snippet_text}</p></br>
-            Phone:<p>${res.phone}</p></br>
-           Image: <p>${res. image_url}</p>
-            
-           
-            
+            Name: ${res. name}</br>
+            Address:${res.address}</br>
+            Categories:${res.categories}</br>
+            Yelp's Rating:${res.rating}</br>
+            User's Review:${res.totalReviews}</br>
+            Comments:${res. snippet_text}</br>
+            Phone:${res.phone}</br>
+            Image:${res. image_url}
         </li>
+        
     </g:each>
+         Average Rating:${avgRating}</br> </br>
+         Total Reviews:${commentsCount}
+       
+        <div>User Reviews
+         <g:each var="comment" in="${commentList}">
+    <li> 
+           
+            Comments:${comment.comments}</br>
+            gender:${comment.gender}</br>
+            date:${comment.date}</br>
+            Restaurant Id:${comment.restaurantId}</br>
+            username:${comment.username}
+            
+    </g:each>
+    
+    
+    </div>
 </body>
 </html>

@@ -1,9 +1,3 @@
-<!--
-  To change this license header, choose License Headers in Project Properties.
-  To change this template file, choose Tools | Templates
-  and open the template in the editor.
--->
-
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <html>
@@ -12,8 +6,9 @@
         <title>Sample title</title>
     </head>
     <body>
-        
-        <h1>***************************We Thank for your Comments*****************${comments}******************on the restaurant*********${name}.</br>
-            *************************Here is the rating for the restaurant******************${ratings}</h1>
+        <div>
+        <h3>We thank for your Comments on the server: ${comments}</br>
+            Here is the ratings you choose to give to the server: ${ratings}</h3>
+        </div>
     </body> 
 </html>

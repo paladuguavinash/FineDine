@@ -1,6 +1,6 @@
 package dimesapp
 import org.grails.rateable.*
-class UserComments implements Rateable{
+class UserComments {
 
     String gender
     String serverName
